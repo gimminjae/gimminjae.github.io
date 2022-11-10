@@ -21,4 +21,12 @@
   <img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white"> 
 </div>
 
+### Tool
+<div> 
+  <img src="https://img.shields.io/badge/mysql workbench-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+  <img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=for-the-badge&logo=IntelliJ IDEA&logoColor=white"> 
+  <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> 
+  <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=black"> 
+</div>
+
 [![Solved.ac Profile](http://mazassumnida.wtf/api/generate_badge?boj=min356812)](https://solved.ac/min356812)<br/>
