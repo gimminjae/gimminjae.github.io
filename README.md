@@ -6,7 +6,7 @@
 
   <div> 
     <a href="https://velog.io/@gimminjae"><img src="https://img.shields.io/badge/velong-20C997?style=for-the-badge&logo=velog&logoColor=white"></a>
-    <a href="https://github.com/gimminjae"><img src="https://img.shields.io/badge/이력서-000000?style=for-the-badge&logo=notion&logoColor=white"></a>
+    <a href="https://dazzling-spear-528.notion.site/1bd070d5d0354dae828325fc92024abd"><img src="https://img.shields.io/badge/이력서-000000?style=for-the-badge&logo=notion&logoColor=white"></a>
   </div>
 
 <h3>Contack</h3>
