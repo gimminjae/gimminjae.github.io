@@ -1,0 +1,103 @@
+---
+layout: post
+title: "2024-06-18"
+date: 2024-06-18 09:00:00 +0900
+categories: diary
+---
+
+# 2024/06/18
+오늘은 회사 MSA 솔루션의 base-service에 모든 데이터를 삭제처리할 때 실제로 delete 하는 것이 아닌 delYn을 'Y'으로 바꾸도록 하는 공통 기능과 조회가 발생할 때 delYn = 'N' 조건이 default로 들어가는 공통기능을 테스트해봤다.
+
+<hr>
+
+먼저 삭제처리시 delYn = 'Y'을 처리하는 방법 두 가지를 찾아봤다.
+### @SQLDelete
+```kotlin
+@Entity
+@Table("...")
+@SQLDelete(sql = "UPDATE TABLE_NAME SET DEL_YN = 'Y' WHERE ID_NAME = ?")
+class Entity {
+    ...
+}
+```
+이렇게 하면 JPA가 delete sql이 실행되는 시점에 delete문 대신 위에 명시해 준 sql을 실행시킨다.
+
+### Spring AOP
+```kotlin
+@Aspect
+@Component
+class CommonAspect {
+
+    @PersistenceContext
+    private lateinit var entityManager: EntityManager
+
+    /**
+    둘 중 하나만 사용 (메서드명 동일)
+     */
+    // JPA의 delete(entity)를 실행하는 포인트
+    @Pointcut("execution(* org.springframework.data.repository.CrudRepository+.delete(..)) && args(entity)")
+    fun deletePointcut(entity: Any) {
+    }
+
+    // DelYnChange 어노테이션이 붙은 & entity를 argument로 받는 메서드가 실행되는 포인트
+    @Pointcut(value = "@annotation(com.example.base.common.aop.DelYnChange) && args(entity)")
+    fun deletePointcut(entity: Any) {
+    }
+
+    @Around("deletePointcut(entity)")
+    @Throws(Throwable::class)
+    fun aroundDelete(joinPoint: ProceedingJoinPoint, entity: Any) {
+        println("entity: $entity")
+        val clazz = entity.javaClass
+        try {
+            val delYnField = clazz.getDeclaredField("delYn")
+            delYnField.isAccessible = true
+            delYnField.set(entity, true)
+            entityManager.merge(entity)
+        } catch (e: NoSuchFieldException) {
+            println("NoSuchFieldException: $entity")
+        } catch (e: IllegalAccessException) {
+            println("NoSuchFieldException: $entity")
+        }
+    }
+}
+```
+aop를 사용하여 두가지의 경우를 구현했다.
+
+repository의 delete(entity)가 실행될 때마다 호출되는 것,
+
+DelYnChange라는 커스텀 어노테이션을 만들어 해당 어노테이션이 붙으면서 entity를 인자로 받는 메서드가 실행될 때마다 호출되는 것
+
+<hr>
+
+조회시 delYn = 'N' 이 default 조건으로 들어가는 것
+
+### @SQLRestriction
+```kotlin
+@SQLRestriction("DEL_YN = 'N'")
+```
+요런 어노테이션을 붙여주면 최종 DB에 SQL이 나갈 때 DEL_YN = 'N' 조건이 자동으로 붙는다.
+
+JPA의 메서드를 사용하면 해당 조건이 무조건 붙는다.
+
+만약 위의 조건을 피해서 조회해야 할 경우가 있다면 JPA에서 제공하는 JpaRepository 메서드가 아닌 QueryDsl, @Query 등을 사용해 따로 조회 기능을 구현해야 한다.
+
+### Spring AOP
+```kotlin
+...
+    @Pointcut("execution(* com.exmaple..*Repository+.find*(..))")
+    fun findPointcut() {
+    }
+
+    @Around("findPointcut()")
+    @Throws(Throwable::class)
+    fun aroundFind(joinPoint: ProceedingJoinPoint): Any {
+        ....
+    }
+...
+```
+이 역시도 AOP로 구현해볼까 했지만, 모든 repository의 find가 붙고 인자의 형태와 상관없이 받아 처리하기 때문에 각각 들어오는 것마다 인자가 달라 어떻게 해야 할지 고민이다.
+
+위의 @SQLRestriction 을 쓰는 게 가장 간단해 보이기는 한다.
+
+그리고 @Filter, @FilterDef라는 게 있긴 했는데, 더 알아봐야 한다.
