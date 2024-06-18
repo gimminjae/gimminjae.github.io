@@ -1,0 +1,50 @@
+---
+layout: post
+title: "2024-06-14"
+date: 2024-06-14 09:00:00 +0900
+categories: diary
+---
+
+# 2024-06-14
+회사 프로젝트 base 서비스의 아키텍처
+### Hexagonal Architecture
+```agsl
+com.example
+ ├── application
+ │    ├── domain
+ │    │    ├── entity
+ │    │    │    └── Product.kt
+ │    │    ├── valueobject
+ │    │    ├── service
+ │    │    │    └── ProductService.kt
+ │    │    └── repository
+ │    │         └── ProductRepository.kt
+ │    ├── usecase
+ │    │    └── GetProductUseCase.kt
+ │    └── service
+ ├── adapters
+ │    ├── inbound
+ │    │    ├── controller
+ │    │    │    └── ProductController.kt
+ │    │    └── listener
+ │    └── outbound
+ │         ├── repository
+ │         │    └── ProductRepositoryImpl.kt
+ │         └── client
+ └── configuration
+      ├── spring
+      │    └── AppConfig.kt
+      └── bean
+
+```
+
+### Process example
+user -> adapter(controller) -> port(useCase) -> domain & application(service) -> port -> adapter -> repository -> DB
+
+### Architecture Image
+![](https://velog.velcdn.com/images/mrcocoball2/post/1f9700dd-63d5-4800-bb5c-4e3b9c39672c/image.png)
+
+### 링크
+https://velog.io/@mrcocoball2/MSA-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0-3.-%ED%97%A5%EC%82%AC%EA%B3%A0%EB%82%A0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-Hexagonal-Architecture
+
+https://cantcoding.tistory.com/107
