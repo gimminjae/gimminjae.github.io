@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2024-06-18"
+title: "2024-06-18 AOP / @SQLDelete / @SQLRestriction"
 date: 2024-06-18 09:00:00 +0900
 categories: diary
 ---
