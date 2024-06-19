@@ -39,8 +39,8 @@ Entity간의 연관관계가 복잡할 경우 무한 참조 혹은 불필요한 
 just use class
 
 ### list of post I watched (순서대로 보면 좋음)
-[Wooseok 블로그](https://wslog.dev/kotlin-jpa-entity)
-[baeldung](https://www.baeldung.com/kotlin/jpa)
-[스포카 기술 블로그](https://spoqa.github.io/2022/08/16/kotlin-jpa-entity.html)
-[Kotlin 공식 문서](https://kotlinlang.org/docs/data-classes.html#standard-data-classes)
+[Wooseok 블로그](https://wslog.dev/kotlin-jpa-entity) |
+[baeldung](https://www.baeldung.com/kotlin/jpa) |
+[스포카 기술 블로그](https://spoqa.github.io/2022/08/16/kotlin-jpa-entity.html) | 
+[Kotlin 공식 문서](https://kotlinlang.org/docs/data-classes.html#standard-data-classes) | 
 [Hibernate ORM User Guide 공식 문서](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#mapping-model-pojo-equalshashcode)
