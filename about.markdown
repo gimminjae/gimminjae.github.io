@@ -1,18 +1,27 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+# Introduce
+I am a Junior developer with a strong interest and passion for Software Development.
+I enjoy learning and trying new technologies and fields.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+I started my career as a Java backend developer and used to work with Vue.js, React.js (Frontend), Express.js, and Java Spring (Backend).
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+# Skills I have used
+### FrontEnd
+Javascript | Typescript | React.js
+### BackEnd
+Express.js | **Java & Spring** | Kotlin & Spring | JPA | Query-Dsl | Kotlin-Jdsl
+### DB
+Oracle | MySql | PostgreSql | Redis
+### Infra
+Docker | Jenkins | AWS EC2 | AWS RDS
+### Tools
+Intellij | VScode | Eclipse | DBeaver | Postman | Slack | Notion | Discord
 
-
-[jekyll-organization]: https://github.com/jekyll
+- Email: [min356812@naver.com](min356812@naver.com)
+- [Linked In](https://www.linkedin.com/in/minjae-kim-73431b25a/)
+- [Github](https://github.com/gimminjae)
