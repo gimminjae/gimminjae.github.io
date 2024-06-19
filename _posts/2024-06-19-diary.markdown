@@ -1,0 +1,46 @@
+---
+layout: post
+title: "Kotlin + JPA | data class, final, open"
+date: 2024-06-18 09:00:00 +0900
+categories: diary
+---
+
+# 2024-06-18
+회사에서 kotlin + spring + jpa로 프로젝트 개발중 JPA Entity는 data class로 선언하면 안된다는 글들을 보았다.
+
+그 이유는 여러가지 글들을 보고 간단하게 정리하자면 이렇다.
+
+### Kotlin
+Kotlin 공식 문서 중
+> Data classes cannot be abstract, open, sealed, or inner.
+
+data class는 불변이며, open 일 수 없다.
+### JPA
+JPA Hibernate 공식 문서 중
+> The entity class must not be final.
+
+Entity class는 final, 즉 불변이면 안된다.
+
+Kotlin과 JPA는 서로 부딫히는 부분이 있다.
+사실 Kotlin으로 작성한 class, data class를 decompile 해보면 다 final로 된다.
+왜냐하면 기본적으로 Kotlin은 모든 것이 불변이기 때문.
+그러면 JPA에서 lazy loading을 위해 proxy를 생성할 때 생성하지 못함.
+class에 open을 선언해주면 decompile시 final이 제거됨. 
+참고로 open data class 이런 형식은 불가능하다.
+
+### All-open plugin + data class
+Kotlin All-open plugin을 사용하면 data class도 open이 적용된다.
+하지만, 서로 부딫히는 것들을 굳이 끼워맞출 필요는...
+
+그리고 data class의 편리한 메서드들(ex: toString()..)을 사용하다보면, 
+Entity간의 연관관계가 복잡할 경우 무한 참조 혹은 불필요한 추가 쿼리 요청을 하게 될 수도..
+
+### Conclusion
+just use class
+
+### list of post I watched (순서대로 보면 좋음)
+[Wooseok 블로그](https://wslog.dev/kotlin-jpa-entity)
+[baeldung](https://www.baeldung.com/kotlin/jpa)
+[스포카 기술 블로그](https://spoqa.github.io/2022/08/16/kotlin-jpa-entity.html)
+[Kotlin 공식 문서](https://kotlinlang.org/docs/data-classes.html#standard-data-classes)
+[Hibernate ORM User Guide 공식 문서](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#mapping-model-pojo-equalshashcode)
