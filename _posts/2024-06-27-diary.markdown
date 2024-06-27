@@ -1,0 +1,25 @@
+---
+layout: post
+title: "Common Git Branch Naming Strategy | Branch Name Prefixes"
+date: 2024-06-27 09:00:00 +0900
+categories: diary
+---
+
+# 2024-06-27
+### Branch Prefixes
+Using prefixes in branch names helps to quickly identify the purpose of the branches. Here are some common types of branches with their corresponding prefixes:
+
+Feature Branches
+> These branches are used for developing new features. Use the prefix feature/. For instance, feature/login-system.
+
+Bugfix Branches
+> These branches are used to fix bugs in the code. Use the prefix bugfix/. For example, bugfix/header-styling.
+
+Hotfix Branches
+> These branches are made directly from the production branch to fix critical bugs in the production environment. Use the prefix hotfix/. For instance, hotfix/critical-security-issue.
+
+Release Branches
+> These branches are used to prepare for a new production release. They allow for last-minute dotting of i’s and crossing t’s. Use the prefix release/. For example, release/v1.0.1.
+
+Documentation Branches
+> These branches are used to write, update, or fix documentation. Use the prefix docs/. For instance, docs/api-endpoints.
