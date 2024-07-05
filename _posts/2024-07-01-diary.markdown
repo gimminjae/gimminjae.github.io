@@ -1,0 +1,13 @@
+---
+layout: post
+title: "update remote git branch"
+date: 2024-07-01 09:00:00 +0900
+categories: diary
+---
+
+# 2024-07-01
+the way to update git remote branch
+
+
+# Command
+> git fetch --all --prune
