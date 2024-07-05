@@ -1,13 +1,40 @@
 ---
 layout: post
-title: "update remote git branch"
-date: 2024-07-01 09:00:00 +0900
+title: "Kotlin - JPA Hibernate @GenericGenerator ==> @IdGeneratorType"
+date: 2024-07-04 09:00:00 +0900
 categories: diary
 ---
 
-# 2024-07-01
-the way to update git remote branch
+# 2024-07-04
+@GenericGenerator annotation is deprecated from hibernate 6.5 version.
+Instead, We can use @IdGeneratorType
 
 
-# Command
-> git fetch --all --prune
+# @GenericGenerator
+```kotlin
+    @Id
+    @Column(name = "MEM_ID")
+    @GenericGenerator(
+        name = "id",
+        strategy = "com.example.generator.IdGenerator"
+    )
+    @GeneratedValue(generator = "id")
+    val id: Long? = null
+```
+
+# Using @IdGeneratorType
+### Custom annotation using @IdGeneratorType
+```kotlin
+@IdGeneratorType(IdGenerator::class) // IdGenerator is generator class I made
+@Target(AnnotationTarget.FUNCTION, AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class CustomIdGenerator
+```
+```kotlin
+@Id
+@Column(name = "MEM_ID", nullable = false)
+@CustomIdGenerator
+val id: Long? = null
+```
+
+Using @IdGeneratorType, We can reduce code and change code to be simple.
